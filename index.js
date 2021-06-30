@@ -32,7 +32,7 @@ client.connect(err => {
     })
 
 
-    app.get("/blogs/:id", (req, res) => {
+    app.get("/blog/:id", (req, res) => {
         BlogList
             .find({ _id: ObjectID(req.params.id) })
             .toArray((err, blogs) => {
