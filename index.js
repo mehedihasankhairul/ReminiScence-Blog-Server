@@ -4,8 +4,8 @@ const MongoClient = require('mongodb').MongoClient;
 const { ObjectID, ObjectId } = require("bson");
 const cors = require("cors");
 require("dotenv").config();
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 const port = process.env.PORT || 5000;
 
@@ -33,20 +33,21 @@ client.connect(err => {
 
 
     app.get("/blogs/:id", (req, res) => {
-        blogsCollection
+        BlogList
             .find({ _id: ObjectID(req.params.id) })
-            .toArray((err, blog) => {
-                res.send(blog[0]);
+            .toArray((err, blogs) => {
+                res.send(blogs[0]);
             });
     });
 
     // Delete Route
 
-    app.delete("/delete-blog/:id", (req, res) => {
-        blogsCollection
+    app.delete("/delete/:id", (req, res) => {
+        BlogList
             .deleteOne({ _id: ObjectId(req.params.id) })
             .then((result) => {
                 res.send(result.deletedCount > 0);
+                console.log('delete done')
             });
     });
 
@@ -54,8 +55,6 @@ client.connect(err => {
 
 
 console.log('Connected')
-
-
 
 
 
