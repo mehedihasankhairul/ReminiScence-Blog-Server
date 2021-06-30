@@ -18,16 +18,16 @@ client.connect(err => {
 
     //Add  Order From Client
     app.post('/addBlog', (req, res) => {
-        const review = req.body;
-        BlogList.insertOne(review)
+        const newBlog = req.body;
+        BlogList.insertOne(newBlog)
             .then(result => {
                 res.send(result.insertedCount > 0)
             })
     })
     app.get('/blogs', (req, res) => {
         BlogList.find()
-            .toArray((err, docs) => {
-                res.send(docs)
+            .toArray((err, blogs) => {
+                res.send(blogs)
             })
     })
 
